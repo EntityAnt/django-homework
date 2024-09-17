@@ -5,6 +5,9 @@ from catalog.models import Product, Category
 class Command(BaseCommand):
     help = 'Add test students to the database'
 
+    Product.objects.all().delete()
+    Category.objects.all().delete()
+
     def handle(self, *args, **kwargs):
 
         fruit, _ = Category.objects.get_or_create(name='Фрукты')
