@@ -14,6 +14,6 @@ def contacts(request):
         message = request.POST.get('message')
         # Обработка данных (например, сохранение в БД, отправка email и т. д.)
         # Здесь мы просто возвращаем простой ответ
-        print(f"Получено сообшение от {name} тел. {phone}: {message}")
+        print(f"Получено сообщение от {name} тел. {phone}: {message}")
         return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
     return render(request, 'contacts.html')
