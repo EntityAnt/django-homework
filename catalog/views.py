@@ -42,7 +42,7 @@ class ProductDeleteView(DeleteView):
 
 
 class ContactView(TemplateView):
-    template_name = 'catalog/contact.html'
+    template_name = 'catalog/blog_contact.html'
 
     def get_context_data(self, **kwargs):
         if self.request.method == 'POST':
@@ -63,4 +63,4 @@ class ContactView(TemplateView):
 #         # Здесь мы просто возвращаем простой ответ
 #         print(f"Получено сообщение от {name} тел. {phone}: {message}")
 #         return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
-#     return render(request, 'contact.html')
+#     return render(request, 'blog_contact.html')
