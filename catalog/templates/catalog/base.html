@@ -179,7 +179,7 @@
 
 
 <header data-bs-theme="dark">
-{% include 'catalog/includes/inc_menu.html'%}
+    {% include 'catalog/includes/inc_menu.html'%}
 </header>
 
 <main>
@@ -189,26 +189,19 @@
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Гипермаркет </h1>
                 <p class="lead text-body-secondary">Шестерочка</p>
-                <p>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_new' %}" role="button">Новый продукт</a>
-
-                </p>
-
-
-
             </div>
         </div>
     </section>
 
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 
 </main>
 
 <footer class="text-body-secondary py-5">
     <div class="container">
         <p class="float-end mb-1">
-<!--            <a href="#">Back to top</a>-->
+            <!--            <a href="#">Back to top</a>-->
         </p>
         <p class="mb-1"></p>
         <p class="mb-0"><a href="/"></a>

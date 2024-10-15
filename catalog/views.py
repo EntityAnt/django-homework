@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 
-from catalog.models import Product
+from catalog.forms import ProductForm, CategoryForm
+from catalog.models import Product, Category
 
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
@@ -23,13 +24,13 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = '__all__'
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:products_list')
 
 
 class ProductUpdateView(UpdateView):
     model = Product
-    fields = '__all__'
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:products_list')
 
     def get_success_url(self):
@@ -41,8 +42,37 @@ class ProductDeleteView(DeleteView):
     success_url = reverse_lazy('catalog:products_list')
 
 
+class CategoryListView(ListView):
+    model = Category
+
+
+class CategoryCreateView(CreateView):
+    model = Category
+    form_class = CategoryForm
+    success_url = reverse_lazy('catalog:category_list')
+
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    form_class = CategoryForm
+    success_url = reverse_lazy('catalog:category_list')
+
+
+class CategoryDetailView(UpdateView):
+    model = Category
+    form_class = CategoryForm
+    success_url = reverse_lazy('catalog:category_list')
+
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+    success_url = reverse_lazy('catalog:category_list')
+
+
+
+
 class ContactView(TemplateView):
-    template_name = 'catalog/blog_contact.html'
+    template_name = 'catalog/contact.html'
 
     def get_context_data(self, **kwargs):
         if self.request.method == 'POST':
@@ -53,14 +83,3 @@ class ContactView(TemplateView):
             return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
         return super().get_context_data(**kwargs)
 
-# def contacts(request):
-#     if request.method == 'POST':
-#         # Получение данных из формы
-#         name = request.POST.get('name')
-#         phone = request.POST.get('phone')
-#         message = request.POST.get('message')
-#         # Обработка данных (например, сохранение в БД, отправка email и т. д.)
-#         # Здесь мы просто возвращаем простой ответ
-#         print(f"Получено сообщение от {name} тел. {phone}: {message}")
-#         return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
-#     return render(request, 'blog_contact.html')
