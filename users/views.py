@@ -1,14 +1,36 @@
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic.edit import CreateView
-from dotenv import load_dotenv
+
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
 from .forms import UserRegisterForm
 from .models import User
 import secrets
 from config.settings import EMAIL_HOST_USER
 
+
+class UserListView(ListView):
+    model = User
+    template_name = 'users/users_list.html'
+
+
+class UserDetailView(DetailView):
+    model = User
+
+
+class UserUpdateView(UpdateView):
+    model = User
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('users:users_list')
+
+    def get_success_url(self):
+        return reverse('users:user_detail', args=[self.kwargs.get('pk')])
+
+
+class UserDeleteView(DeleteView):
+    model = User
+    success_url = reverse_lazy('users:users_list')
 
 
 class UserCreateView(CreateView):
@@ -28,7 +50,7 @@ class UserCreateView(CreateView):
             subject='Подтверждение регистрации.',
             message=f'Здравствуйте! Перейдите по ссылке для подтверждения почты: {url}',
             from_email=EMAIL_HOST_USER,
-            recipient_list=[user.email,],
+            recipient_list=[user.email, ],
         )
         return super().form_valid(form)
 
