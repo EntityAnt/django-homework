@@ -22,7 +22,7 @@ class UserRegisterForm(FormStyleMixin, UserCreationForm):
         fields = ('email', 'password1', 'password2', 'avatar',)
 
     def clean_photo(self):
-        image = self.cleaned_data.get('photo')
+        image = self.cleaned_data.get('avatar')
 
         # Проверка формата файла
         if image:
