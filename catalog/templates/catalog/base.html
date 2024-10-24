@@ -189,6 +189,11 @@
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Гипермаркет </h1>
                 <p class="lead text-body-secondary">Шестерочка</p>
+                {% if user.is_authenticated %}
+                    <p>Добро пожаловать, {{user.email}}!</p>
+                {% else %}
+                    <p>Добро пожаловать на сайт!</p>
+                {% endif %}
             </div>
         </div>
     </section>
